@@ -3,6 +3,7 @@ using namespace std;
 
 const int N = 1e2+2;
 int mat[N][N];
+bool visited[N][N];
 
 int dr[4] = {-1, 1, 0, 0};
 int dc[4] = {0, 0, -1, 1};
@@ -12,6 +13,7 @@ int n, m;
 void bfs(pair<int, int> start) {
     queue<pair<int, int>> q;
     q.push(start);
+    visited[start.first][start.second] = true;
 
     while(!q.empty()) {
         int r = q.front().first;
@@ -23,7 +25,8 @@ void bfs(pair<int, int> start) {
             int nc = c + dc[i];
             if(nr < 1 || nr > n || nc < 1 || nc > m) continue;
             if(mat[nr][nc] == 0) continue;
-            else if(mat[nr][nc] == 1) {
+            else if(mat[nr][nc] == 1 && !visited[nr][nc]) {
+                visited[nr][nc] = true;
                 q.push({nr, nc});
                 mat[nr][nc] = mat[r][c] + 1;
             }
