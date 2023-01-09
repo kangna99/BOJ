@@ -3,12 +3,11 @@
 #include <numeric>
 #include <cmath>
 #include <vector>
-#include <cassert>
-
 using namespace std;
 
 constexpr int N = 5e5+5;
-int arr[N], cnt[N];
+int arr[N], tmp[8008];
+int *cnt = tmp + 4004;
 int n, meanval, medianval, modeval, rangeval, maxval;
 vector<int> v;
 
@@ -17,10 +16,10 @@ int main() {
     cin >> n;
     for(int i = 0; i < n; i++) {
         cin >> arr[i];
-        cnt[arr[i] + 4000]++;
+        cnt[arr[i]]++;
     }
     sort(arr, arr + n);
-    for(int i = 0; i < 8001; i++) {
+    for(int i = -4000; i <= 4000; i++) {
         if(cnt[i] > maxval) {
             maxval = cnt[i];
             v.clear();
@@ -31,14 +30,11 @@ int main() {
         }    
     }
     if(v.size() > 1) {
-        for(int &num : v) {
-            num -= 4000;
-        }
         sort(v.begin(), v.end());
         modeval = v[1];
     }
     else {
-        modeval = v[0] - 4000;
+        modeval = v[0];
     }
     meanval = round(accumulate(arr, arr+n, 0.0) / n);
     medianval = arr[n/2];
