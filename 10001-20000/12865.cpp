@@ -4,7 +4,7 @@ using namespace std;
 int n, k;
 int weight[101];
 int value[101];
-int dp[101][100001]; // dp[i][j] = c : i번째 물건, 현재 남은 배낭의 무게 j, 그때의 가치 c
+int dp[101][100001]; // dp[i][j] = c : i번째 물건, 현재 배낭의 무게 j, 그때의 가치 c
 
 int main() {
     ios::sync_with_stdio(false); cin.tie(nullptr);
